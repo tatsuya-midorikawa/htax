@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace htax {
-
-
   public partial class htax : Form {
     private readonly string _htaxfile;
     private static readonly System.Net.Http.HttpClient http = new System.Net.Http.HttpClient();

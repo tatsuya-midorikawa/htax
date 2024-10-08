@@ -29,7 +29,7 @@ namespace htax {
     [STAThread]
     static void Main(string[] args) {
 #if DEBUG
-      Application.Run(new htax(""));
+      Application.Run(new htax("https://www.microsoft.com"));
 #else
       var path = 0 < args.Length ? Path.GetFullPath(args[0]) : "";
       if (Htax.IsHtax(path) && File.Exists(path)) {
