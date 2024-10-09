@@ -1,7 +1,7 @@
 ﻿module Htax.Program
 
 module Form =
-  let inline update_title (form: System.Windows.Forms.Form, title: string) =
+  let inline update_title (title: string) (form: System.Windows.Forms.Form) =
     form.Text <- title
 
 let inline initialize () =
@@ -20,14 +20,8 @@ let inline initalize_components (
     } |> ignore)
 
   wv2.CoreWebView2InitializationCompleted.Add(fun _ ->
-    wv2.CoreWebView2.DOMContentLoaded.Add(fun _ ->
-      form.Text <- wv2.CoreWebView2.DocumentTitle
-      
-    )
-    
-    wv2.NavigationCompleted.Add(fun _ ->
-      form.Text <- wv2.CoreWebView2.DocumentTitle
-    )
+    wv2.CoreWebView2.DOMContentLoaded.Add (fun _ -> form |> Form.update_title wv2.CoreWebView2.DocumentTitle)
+    wv2.NavigationCompleted.Add (fun _ -> form |> Form.update_title wv2.CoreWebView2.DocumentTitle)
   )
   wv2.Dock <- System.Windows.Forms.DockStyle.Fill
   form.Controls.Add wv2
