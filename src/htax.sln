@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htax", "htax\htax.csproj", "{C3B01A1F-3C43-4C67-891A-94E219355D8C}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "htax.core", "htax.core\htax.core.fsproj", "{4D54E111-70C5-4CB4-8CF0-93FB97569E72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C3B01A1F-3C43-4C67-891A-94E219355D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B01A1F-3C43-4C67-891A-94E219355D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3B01A1F-3C43-4C67-891A-94E219355D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D54E111-70C5-4CB4-8CF0-93FB97569E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D54E111-70C5-4CB4-8CF0-93FB97569E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D54E111-70C5-4CB4-8CF0-93FB97569E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D54E111-70C5-4CB4-8CF0-93FB97569E72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace htax {
       await wv2.EnsureCoreWebView2Async();
       wv2.Source = new Uri(_htaxfile);
     }
+
     private void OnCoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e) {
       wv2.CoreWebView2.DOMContentLoaded += OnDOMContentLoaded;
     }
