@@ -3,8 +3,7 @@
 module Form =
   let inline run (form: System.Windows.Forms.Form) =
     try
-      System.Windows.Forms.Application.Run form
-      0 
+      System.Windows.Forms.Application.Run form; 0 
     with
       _ -> -1
 
