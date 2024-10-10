@@ -9,13 +9,20 @@ let inline initalizeComponents (
   form: System.Windows.Forms.Form, 
   webview2: Microsoft.Web.WebView2.WinForms.WebView2
 ) =
-  webview2.CoreWebView2InitializationCompleted.Add(fun args ->
-    webview2.CoreWebView2.DOMContentLoaded.Add (fun args -> form |> Form.setTitle webview2.CoreWebView2.DocumentTitle |> ignore)
-    webview2.NavigationCompleted.Add (fun args -> form |> Form.setTitle webview2.CoreWebView2.DocumentTitle |> ignore)
-  )
+  let updateTitle _ =
+    form |> Form.setTitle webview2.CoreWebView2.DocumentTitle
+
+  webview2
+    |> WebView2.initializationCompleted (fun _ ->
+        webview2
+          |> WebView2.domcontentLoaded updateTitle
+          |> WebView2.navigationCompleted updateTitle
+      )
+    |> ignore
+
   form
     |> Form.onLoad (fun _ -> task {
-        do! webview2.EnsureCoreWebView2Async()
+        do! webview2 |> WebView2.ensureCoreWebView2Async
         return webview2 
           |> WebView2.setDock System.Windows.Forms.DockStyle.Fill
           |> WebView2.setSource "https://www.microsoft.com"
@@ -31,6 +38,4 @@ let main args =
   use wv2 = new Microsoft.Web.WebView2.WinForms.WebView2()
   initalizeComponents (form, wv2)
 
-  System.Windows.Forms.Application.Run form
-  
-  0
+  form |> Form.run
