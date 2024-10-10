@@ -1,30 +1,27 @@
 ﻿module Htax.Program
 
-module Form =
-  let inline update_title (title: string) (form: System.Windows.Forms.Form) =
-    form.Text <- title
-
 let inline initialize () =
   System.Windows.Forms.Application.EnableVisualStyles()
   System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false)
   System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware) |> ignore
 
-let inline initalize_components (
+let inline initalizeComponents (
   form: System.Windows.Forms.Form, 
-  wv2: Microsoft.Web.WebView2.WinForms.WebView2
+  webview2: Microsoft.Web.WebView2.WinForms.WebView2
 ) =
-  form.Load.Add(fun _ ->
-    task {
-      do! wv2.EnsureCoreWebView2Async()
-      wv2.Source <- new System.Uri("https://www.microsoft.com")
-    } |> ignore)
-
-  wv2.CoreWebView2InitializationCompleted.Add(fun _ ->
-    wv2.CoreWebView2.DOMContentLoaded.Add (fun _ -> form |> Form.update_title wv2.CoreWebView2.DocumentTitle)
-    wv2.NavigationCompleted.Add (fun _ -> form |> Form.update_title wv2.CoreWebView2.DocumentTitle)
+  webview2.CoreWebView2InitializationCompleted.Add(fun args ->
+    webview2.CoreWebView2.DOMContentLoaded.Add (fun args -> form |> Form.setTitle webview2.CoreWebView2.DocumentTitle |> ignore)
+    webview2.NavigationCompleted.Add (fun args -> form |> Form.setTitle webview2.CoreWebView2.DocumentTitle |> ignore)
   )
-  wv2.Dock <- System.Windows.Forms.DockStyle.Fill
-  form.Controls.Add wv2
+  form
+    |> Form.onLoad (fun _ -> task {
+        do! webview2.EnsureCoreWebView2Async()
+        return webview2 
+          |> WebView2.setDock System.Windows.Forms.DockStyle.Fill
+          |> WebView2.setSource "https://www.microsoft.com"
+      })
+    |> Form.add webview2
+    |> ignore
 
 [<EntryPoint; System.STAThread>]
 let main args =
@@ -32,7 +29,7 @@ let main args =
   
   use form = new System.Windows.Forms.Form()
   use wv2 = new Microsoft.Web.WebView2.WinForms.WebView2()
-  initalize_components (form, wv2)
+  initalizeComponents (form, wv2)
 
   System.Windows.Forms.Application.Run form
   

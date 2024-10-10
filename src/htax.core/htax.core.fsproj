@@ -5,10 +5,12 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AssemblyName>htax</AssemblyName>
-		<RootNamespace>htax</RootNamespace>
+		<RootNamespace>Htax</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="File.fs" />
+		<Compile Include="Component.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
