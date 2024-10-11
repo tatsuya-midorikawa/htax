@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "htax.core": {
+      "commandName": "Project",
+      "commandLineArgs": "./index.htax"
+    }
+  }
+}
