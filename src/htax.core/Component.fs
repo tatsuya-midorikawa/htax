@@ -1,6 +1,12 @@
 ﻿namespace Htax
 
 module Form =
+  let inline suspendLayout (form: System.Windows.Forms.Form) =
+    form.SuspendLayout(); form
+
+  let inline resumeLayout (perform: bool) (form: System.Windows.Forms.Form) =
+    form.ResumeLayout(perform)
+
   let inline run (form: System.Windows.Forms.Form) =
     try
       System.Windows.Forms.Application.Run form; 0 
@@ -17,6 +23,12 @@ module Form =
     form.Text <- title; form
 
 module WebView2 =
+  let inline beginInit (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
+    (wv2 :> System.ComponentModel.ISupportInitialize).BeginInit(); wv2
+
+  let inline endInit (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
+    (wv2 :> System.ComponentModel.ISupportInitialize).EndInit()
+
   let inline initializationCompleted ([<InlineIfLambda>] callback: Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs -> 'T) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
     wv2.CoreWebView2InitializationCompleted.Add (callback >> ignore); wv2
 

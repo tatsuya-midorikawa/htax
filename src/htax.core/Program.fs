@@ -13,14 +13,16 @@ let inline initalizeComponents (
     form |> Form.setTitle webview2.CoreWebView2.DocumentTitle
 
   webview2
+    |> WebView2.beginInit
     |> WebView2.initializationCompleted (fun _ ->
         webview2
           |> WebView2.domcontentLoaded updateTitle
           |> WebView2.navigationCompleted updateTitle
       )
-    |> ignore
+    |> WebView2.endInit
 
   form
+    |> Form.suspendLayout
     |> Form.onLoad (fun _ -> task {
         do! webview2 |> WebView2.ensureCoreWebView2Async
         return webview2 
@@ -28,7 +30,7 @@ let inline initalizeComponents (
           |> WebView2.setSource "https://www.microsoft.com"
       })
     |> Form.add webview2
-    |> ignore
+    |> Form.resumeLayout false
 
 [<EntryPoint; System.STAThread>]
 let main args =
