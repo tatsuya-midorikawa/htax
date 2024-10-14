@@ -29,6 +29,8 @@ type HtaxSettings = {
     navigable      = None; scroll          = None; scrollflat  = None; selection      = None; showintaskbar  = None;
     singleinstance = None; sysmenu         = None; version     = None; windowstate    = None;
   }
+  static member isEmpty settings =
+    settings = HtaxSettings.empty
   static member val cache = HtaxSettings.empty with get, set
 
 module document =

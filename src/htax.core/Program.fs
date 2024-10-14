@@ -22,6 +22,7 @@ let initalizeComponents (
       let! settings = document.getHtaxSettings webview2
       debug (sprintf "HtaxSettings: %A" settings)
     }
+    |> ignore
 
   webview2
     |> WebView2.beginInit
