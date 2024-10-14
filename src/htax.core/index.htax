@@ -8,12 +8,12 @@
   
   <HTA:APPLICATION
     ID="oHTA"
-    APPLICATIONNAME="name"
+    APPLICATIONNAME="Sample HTAX"
     BORDER="thick"
     BORDERSTYLE="normal"
     CAPTION="yes"
     CONTEXTMENU="yes"
-    ICON="./icon.ico"
+    ICON="./assets/sample.ico"
     INNERBORDER="yes"
     MAXIMIZEBUTTON="yes"
     MINIMIZEBUTTON="yes"

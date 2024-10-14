@@ -14,15 +14,32 @@ let initalizeComponents (
   html: Html.Html
 ) =
   let updateTitle args =
-    form |> Form.setTitle webview2.CoreWebView2.DocumentTitle
+    task {
+      let! title = WebView2.getTitle webview2
+      form |> Form.setTitle title |> ignore
+    }
 
-  let onDomContentLoaded args =
-    updateTitle args |> ignore
+  let updateIcon args =
     task {
       let! settings = document.getHtaxSettings webview2
-      debug (sprintf "HtaxSettings: %A" settings)
+      match settings with
+      | { HtaxSettings.icon = Some icon; } ->
+          // HTAX ファイルはローカルに配置されている前提なので、相対パスでアイコンを指定している場合は、すべてローカルにあるものとして扱う
+          // ただし、アイコンが URL で指定されている場合は、その URL からアイコンを取得する
+          if icon.StartsWith "https://" || icon.StartsWith "http://" then
+            let! raw = http.GetByteArrayAsync(icon)
+            use stream = new System.IO.MemoryStream(raw)
+            form.Icon <- new System.Drawing.Icon(stream)
+          else
+            form.Icon <- new System.Drawing.Icon(icon)
+      | _ -> ()
     }
-    |> ignore
+
+  let onDomContentLoaded args =
+    task {
+      do! updateTitle args
+      do! updateIcon args
+    }
 
   webview2
     |> WebView2.beginInit

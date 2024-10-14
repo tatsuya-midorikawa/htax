@@ -9,14 +9,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Content Include="assets\sample.ico">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<None Include="index.htax">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<Compile Include="JavaScript.fs" />
 		<Compile Include="File.fs" />
 		<Compile Include="Component.fs" />
-		<Compile Include="JavaScript.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
+
+	<ItemGroup />
 
 	<ItemGroup>
 		<PackageReference Update="FSharp.Core" Version="8.0.401" />

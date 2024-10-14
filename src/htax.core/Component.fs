@@ -49,3 +49,11 @@ module WebView2 =
 
   let inline setDock (dock: System.Windows.Forms.DockStyle) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
     wv2.Dock <- dock; wv2
+
+  let inline getTitle (webview2: Microsoft.Web.WebView2.WinForms.WebView2) =
+    task {
+      let! settings = document.getHtaxSettings webview2
+      return match settings with
+              | { HtaxSettings.applicationname = Some name; } -> name
+              | _ -> webview2.CoreWebView2.DocumentTitle
+    }

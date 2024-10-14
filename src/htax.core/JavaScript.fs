@@ -1,5 +1,9 @@
 ﻿namespace Htax
 
+[<AutoOpen>]
+module Client =
+  let http = new System.Net.Http.HttpClient();
+
 [<Struct>]
 type HtaxSettings = {
   id: string option
