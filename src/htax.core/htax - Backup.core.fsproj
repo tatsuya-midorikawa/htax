@@ -8,27 +8,15 @@
 		<RootNamespace>Htax</RootNamespace>
 		<AssemblyVersion>0.0.1</AssemblyVersion>
 		<FileVersion>0.0.1</FileVersion>
-		<Title>Extended HTML Application (HTAX)</Title>
-		<Authors>Tatsuya Midorikawa</Authors>
-		<Company>Tatsuya Midorikawa</Company>
-		<Product>HTAX</Product>
-		<Copyright>© 2024 Tatsuya Midorikawa. All rights rserved</Copyright>
-		<PackageProjectUrl>https://github.com/tatsuya-midorikawa/htax/tree/main</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/tatsuya-midorikawa/htax/tree/main</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>hta;htax</PackageTags>
+		<Title>HTAX</Title>
+		<Authors>MIDORIKAWA Tatsuya</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Condition="'$(Configuration)' == 'Debug'" Include="assets\sample.ico">
+		<Content Include="assets\sample.ico">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<None Include="..\..\README.md">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
-		</None>
-		<None Condition="'$(Configuration)' == 'Debug'" Include="index.htax">
+		<None Include="index.htax">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<Compile Include="JavaScript.fs" />
@@ -37,10 +25,11 @@
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
+	<ItemGroup />
+
 	<ItemGroup>
 		<PackageReference Update="FSharp.Core" Version="8.0.401" />
 		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
-		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 	</ItemGroup>
 
 </Project>

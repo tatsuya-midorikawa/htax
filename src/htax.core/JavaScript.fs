@@ -25,13 +25,16 @@ type HtaxSettings = {
   sysmenu: string option
   version: string option
   windowstate: string option
+  width: string option
+  height: string option
 }
  with
   static member empty = {
     id             = None; applicationname = None; border      = None; borderstyle    = None; caption        = None;
     contextmenu    = None; icon            = None; innerborder = None; maximizebutton = None; minimizebutton = None;
     navigable      = None; scroll          = None; scrollflat  = None; selection      = None; showintaskbar  = None;
-    singleinstance = None; sysmenu         = None; version     = None; windowstate    = None;
+    singleinstance = None; sysmenu         = None; version     = None; windowstate    = None; width          = None;
+    height         = None;
   }
   static member isEmpty settings =
     settings = HtaxSettings.empty

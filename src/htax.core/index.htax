@@ -26,6 +26,9 @@
     SYSMENU="yes"
     VERSION="0.0.1"
     WINDOWSTATE="normal"
+
+    WIDTH="800"
+    HEIGHT="600"
   />
 </head>
 <body>
