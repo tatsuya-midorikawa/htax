@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://raw.githubusercontent.com/tatsuya-midorikawa/Polka/refs/heads/main/chat_bubble_message_contact_icon_264231.ico">
   <title>Document</title>
+  
+  <HTA:APPLICATION
+    ID="oHTA"
+    APPLICATIONNAME="name"
+    BORDER="thick"
+    BORDERSTYLE="normal"
+    CAPTION="yes"
+    CONTEXTMENU="yes"
+    ICON="./icon.ico"
+    INNERBORDER="yes"
+    MAXIMIZEBUTTON="yes"
+    MINIMIZEBUTTON="yes"
+    NAVIGABLE="no"
+    SCROLL="yes"
+    SCROLLFLAT="no"
+    SELECTION="yes"
+    SHOWINTASKBAR="yes"
+    SINGLEINSTANCE="no"
+    SYSMENU="yes"
+    VERSION="0.0.1"
+    WINDOWSTATE="normal"
+  />
 </head>
 <body>
   <H1>Hello, htax!</H1>
+  <a href='https://fsdoc.jp'>Click me</a>
 </body>
 </html>

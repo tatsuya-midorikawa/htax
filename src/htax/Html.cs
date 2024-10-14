@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace htax {
         // 結果を処理
         // 結果はJSON形式の文字列として返されるので、パースが必要
         return System.Text.Json.JsonSerializer.Deserialize<string[]>(result);
+      }
+
+      public static async ValueTask<string> foo(Microsoft.Web.WebView2.WinForms.WebView2 wv2) {
+        var script = "(() => { return document.querySelector('meta[charset]') })()";
+        return await wv2.CoreWebView2.ExecuteScriptAsync(script);
       }
     }
   }

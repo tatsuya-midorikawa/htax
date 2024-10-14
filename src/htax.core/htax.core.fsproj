@@ -14,10 +14,9 @@
 		</None>
 		<Compile Include="File.fs" />
 		<Compile Include="Component.fs" />
+		<Compile Include="JavaScript.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
-
-	<ItemGroup />
 
 	<ItemGroup>
 		<PackageReference Update="FSharp.Core" Version="8.0.401" />

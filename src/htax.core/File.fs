@@ -17,15 +17,15 @@ module File =
   let inline exists path =
     System.IO.File.Exists path
 
-  let inline isHtax path =
-    System.IO.File.Exists path && System.IO.Path.GetExtension path = ".htax"
+  let inline isHtax (path: string) =
+    System.IO.Path.GetExtension path = ".htax"
 
-  let inline isHtml path =
-    System.IO.File.Exists path && System.IO.Path.GetExtension path = ".html"
+  let inline isHtml (path: string) =
+    System.IO.Path.GetExtension path = ".html"
+    
 
 module Html =
   type Html = private Html of path: string
-
   let create (path: string) =
     if File.exists path 
       then
@@ -33,6 +33,8 @@ module Html =
       else 
         use sw = System.IO.File.CreateText path
         Html path
+
+  let path (Html path) = path
 
 module Htax =
   type Htax = private Htax of path: string

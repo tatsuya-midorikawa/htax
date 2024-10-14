@@ -43,6 +43,10 @@ namespace htax {
           this.Icon = icon != null ? new Icon(stream) : null;
         }
       }
+
+      var charset = await Html.document.foo(wv2);
+      Debug.WriteLine(charset);
+
     }
   }
 }
