@@ -6,7 +6,9 @@ let inline debug (msg: string) =
 let inline initialize () =
   System.Windows.Forms.Application.EnableVisualStyles()
   System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false)
+#if NET8_0_OR_GREATER
   System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware) |> ignore
+#endif
 
 let initalizeComponents (
   form: System.Windows.Forms.Form, 
@@ -43,7 +45,9 @@ let initalizeComponents (
 
   webview2
     |> WebView2.beginInit
-    |> WebView2.initializationCompleted (fun _ ->
+    |> WebView2.initializationCompleted (fun e ->
+        debug $"Initialization completed: {e.IsSuccess}"
+        if not e.IsSuccess then debug e.InitializationException.Message
         webview2
           |> WebView2.domcontentLoaded onDomContentLoaded
           |> WebView2.navigationCompleted updateTitle

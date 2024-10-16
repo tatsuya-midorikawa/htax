@@ -39,7 +39,7 @@ module WebView2 =
     wv2.NavigationCompleted.Add (callback >> ignore); wv2
 
   let inline ensureCoreWebView2Async (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
-    wv2.EnsureCoreWebView2Async()
+    wv2.EnsureCoreWebView2Async(null)
 
   let inline setSource (uri: string) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
     match System.Uri.TryCreate(uri, System.UriKind.Absolute) with
