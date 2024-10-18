@@ -2,7 +2,9 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net481;net8.0-windows</TargetFrameworks>
+		<TargetFramework>net481</TargetFramework>
+		<!--<TargetFramework>net8.0-windows</TargetFramework>-->
+		<!--<TargetFrameworks>net481;net8.0-windows</TargetFrameworks>-->
 		<UseWindowsForms>true</UseWindowsForms>
 		<AssemblyName>htax</AssemblyName>
 		<RootNamespace>Htax</RootNamespace>
