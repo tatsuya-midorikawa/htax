@@ -37,11 +37,12 @@ let initalizeComponents (
       | _ -> ()
     }
 
-  let onDomContentLoaded args =
+  let onDomContentLoaded = System.EventHandler<_> (fun sender args ->
     task {
       do! updateTitle args
       do! updateIcon args
-    }
+    } |> ignore
+  )
 
   webview2
     |> WebView2.beginInit
@@ -49,7 +50,7 @@ let initalizeComponents (
         debug $"Initialization completed: {e.IsSuccess}"
         if not e.IsSuccess then debug e.InitializationException.Message
         webview2
-          |> WebView2.domcontentLoaded onDomContentLoaded
+          |> WebView2.once.domcontentLoaded onDomContentLoaded
           |> WebView2.navigationCompleted updateTitle
       )
     |> WebView2.endInit

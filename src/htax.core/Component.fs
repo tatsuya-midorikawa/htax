@@ -57,3 +57,20 @@ module WebView2 =
               | { HtaxSettings.applicationname = Some name; } -> name
               | _ -> webview2.CoreWebView2.DocumentTitle
     }
+
+  module subscribe =
+    let inline domcontentLoaded (callback: System.EventHandler<_>) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
+      wv2.CoreWebView2.DOMContentLoaded.AddHandler callback; wv2
+
+  module unsubscribe =
+    let inline domcontentLoaded (callback: System.EventHandler<_>) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
+      wv2.CoreWebView2.DOMContentLoaded.RemoveHandler callback; wv2
+
+  module once =
+    let inline domcontentLoaded (callback: System.EventHandler<_>) (wv2: Microsoft.Web.WebView2.WinForms.WebView2) =
+      let unsubscribe = System.EventHandler<_> (fun sender args ->
+        wv2.CoreWebView2.DOMContentLoaded.RemoveHandler callback
+      )
+      wv2.CoreWebView2.DOMContentLoaded.AddHandler callback
+      wv2.CoreWebView2.DOMContentLoaded.AddHandler unsubscribe
+      wv2
