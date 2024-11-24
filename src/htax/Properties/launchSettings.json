@@ -3,6 +3,10 @@
     "htax": {
       "commandName": "Project",
       "commandLineArgs": "./index.htax"
+    },
+    "internet": {
+      "commandName": "Project",
+      "commandLineArgs": "https://fsdoc.jp"
     }
   }
 }

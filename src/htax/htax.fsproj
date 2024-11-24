@@ -22,10 +22,14 @@
 		<PackageTags>hta;htax</PackageTags>
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 		<PlatformTarget>x64</PlatformTarget>
+		<Configurations>Debug;Release;Debug - Internet</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Condition="'$(Configuration)' == 'Debug'" Include="assets\sample.ico">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\sample.ico" Condition="'$(Configuration)'=='Debug - Internet'">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<None Include="..\..\README.md">
@@ -36,6 +40,8 @@
 		<None Condition="'$(Configuration)' == 'Debug'" Include="index.htax">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+
+		<Compile Include="Path.fs" />
 		<Compile Include="JavaScript.fs" />
 		<Compile Include="File.fs" />
 		<Compile Include="Component.fs" />

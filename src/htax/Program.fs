@@ -1,7 +1,18 @@
 ﻿module Htax.Program
 
+module Debug =
+  let inline writeline (msg: string) =
+    #if DEBUG
+    System.Diagnostics.Debug.WriteLine msg
+    #endif
+    ()
+  let inline writeline' (format: Printf.TextWriterFormat<'T> -> 'T) =
+    ()
 let inline debug (msg: string) =
+  #if DEBUG
   System.Diagnostics.Debug.WriteLine msg
+  #endif
+  ()
 
 let inline initialize () =
   System.Windows.Forms.Application.EnableVisualStyles()
@@ -39,6 +50,7 @@ let initalizeComponents (
 
   let onDomContentLoaded = System.EventHandler<_> (fun sender args ->
     task {
+      debug $"onDomContentLoaded CoreWebView2.Source: {webview2.CoreWebView2.Source}"
       do! updateTitle args
       do! updateIcon args
     } |> ignore
@@ -63,6 +75,11 @@ let initalizeComponents (
           |> WebView2.beginInit
           |> WebView2.setDock System.Windows.Forms.DockStyle.Fill
           |> WebView2.setSource (Html.path html)
+        #if DEBUG
+          |> WebView2.navigationCompleted (fun _ ->
+              Debug.writeline' "%s" "sss"
+              debug $"navigationCompleted CoreWebView2.Source: {webview2.CoreWebView2.Source}" )
+        #endif
           |> WebView2.endInit
       })
     |> Form.add webview2
@@ -71,7 +88,9 @@ let initalizeComponents (
 let inline parseArgs (args: string array) =
   if args.Length = 1 then Some args[0] else None
     |> Option.bind (fun arg ->
-        if File.exists arg && File.isHtax arg then Some (System.IO.Path.GetFullPath arg) else None)
+        if File.exists arg && File.isHtax arg 
+          then Some (System.IO.Path.GetFullPath arg)
+          else None )
     |> Option.map Htax.create
     |> Option.map Htax.copyToHiddenHtml
 
@@ -80,12 +99,12 @@ let main args =
   args
     |> parseArgs
     |> Option.map (fun html -> 
-        initialize ()  
+        initialize ()
       
         use form = new System.Windows.Forms.Form()
         use wv2 = new Microsoft.Web.WebView2.WinForms.WebView2()
         initalizeComponents (form, wv2, html)
-    
+
         form |> Form.run
     )
     |> Option.defaultValue -1
